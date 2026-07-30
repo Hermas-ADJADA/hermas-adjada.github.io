@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermas Adjada | Administrateur Systèmes & Réseaux</title>
+<meta name="description" content="Hermas Adjada, en formation Administrateur Systèmes & Réseaux au CESI, recherche une alternance dès septembre 2026. Mobilité toute la France.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1720;
+    --panel:#12222E;
+    --panel-2:#16293A;
+    --ink:#E8EFF3;
+    --muted:#8FA6B3;
+    --line:#233B4D;
+    --amber:#F0A93B;
+    --amber-deep:#D98A1F;
+    --amber-soft:rgba(240,169,59,.12);
+    --term-bg:#070F16;
+    --term-frame:#101D28;
+    --term-green:#6FD3A6;
+    --term-txt:#B9CDC4;
+    --radius:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    background:var(--bg);
+    background-image:
+      linear-gradient(rgba(35,59,77,.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(35,59,77,.14) 1px, transparent 1px);
+    background-size:44px 44px;
+    color:var(--ink);
+    line-height:1.6;
+    font-size:16px;
+  }
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(11,23,32,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:"IBM Plex Mono",monospace;font-weight:500;text-decoration:none;font-size:15px;color:var(--ink)}
+  .logo b{color:var(--amber)}
+  .nav ul{display:flex;gap:26px;list-style:none}
+  .nav ul a{text-decoration:none;font-size:14.5px;color:var(--muted)}
+  .nav ul a:hover{color:var(--ink)}
+  .cta{
+    display:inline-block;background:var(--amber);color:#1C1204;text-decoration:none;
+    padding:9px 18px;border-radius:999px;font-size:14.5px;font-weight:600;
+  }
+  .cta:hover{filter:brightness(1.08)}
+  @media (max-width:760px){.nav ul{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 64px;position:relative}
+  .hero::before{
+    content:"";position:absolute;right:-60px;top:20px;width:480px;height:480px;
+    background:radial-gradient(circle, rgba(111,211,166,.10), transparent 62%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative}
+  @media (max-width:880px){.hero-grid{grid-template-columns:1fr}}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:14px;font-weight:500;
+  }
+  h1{
+    font-family:"Space Grotesk",sans-serif;font-weight:700;
+    font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.01em;color:#fff;
+  }
+  .hero p.lede{margin:18px 0 22px;color:var(--muted);font-size:17.5px;max-width:46ch}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+    background:var(--amber-soft);color:var(--amber);border:1px solid rgba(240,169,59,.35);
+    padding:5px 12px;border-radius:999px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-ghost{
+    display:inline-block;text-decoration:none;padding:9px 18px;border-radius:999px;
+    border:1.5px solid var(--line);font-size:14.5px;font-weight:500;color:var(--ink);
+  }
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+  /* terminal */
+  .term{
+    background:var(--term-bg);border-radius:12px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.5);
+    border:1px solid var(--line);
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;background:var(--term-frame);
+    padding:10px 14px;border-bottom:1px solid var(--line);
+  }
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot:nth-child(1){background:#E0655A}.dot:nth-child(2){background:#E2B33C}.dot:nth-child(3){background:#63C57E}
+  .term-title{margin-left:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:#5F7887}
+  .term-body{
+    padding:20px 20px 24px;font-family:"IBM Plex Mono",monospace;
+    font-size:13.5px;line-height:1.75;color:var(--term-txt);min-height:250px;
+    white-space:pre-wrap;word-break:break-word;
+  }
+  .term-body .p{color:var(--term-green)}
+  .term-body .out{color:var(--term-txt)}
+  .term-body .hl{color:var(--amber)}
+  .cursor{display:inline-block;width:8px;height:15px;background:var(--term-green);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ---------- sections ---------- */
+  section{padding:64px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+  .sec-head h2{font-family:"Space Grotesk",sans-serif;font-size:28px;letter-spacing:-.01em;color:#fff}
+  .sec-head .path{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--amber)}
+  .sec-head .rule{flex:1;height:1px;background:var(--line)}
+
+  /* parcours timeline */
+  .tl{position:relative;padding-left:34px}
+  .tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-item{position:relative;padding-bottom:34px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-32px;top:7px;width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--amber);
+  }
+  .tl-date{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--term-green);margin-bottom:3px}
+  .tl-item h3{font-family:"Space Grotesk",sans-serif;font-size:18.5px;margin-bottom:2px;color:#fff}
+  .tl-org{color:var(--muted);font-size:14.5px;margin-bottom:8px}
+  .tl-item ul{list-style:none}
+  .tl-item li{position:relative;padding-left:18px;font-size:15px;margin-bottom:5px;color:#C6D4DC}
+  .tl-item li::before{content:"▸";position:absolute;left:0;color:var(--amber)}
+  .tag{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin-left:8px;
+    color:var(--muted);vertical-align:2px;background:var(--panel);
+  }
+
+  /* compétences */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);border-color:rgba(240,169,59,.5);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+  .card h3{
+    font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:500;
+    color:var(--amber);margin-bottom:12px;
+  }
+  .card ul{list-style:none}
+  .card li{font-size:14.5px;padding:4px 0;border-bottom:1px dashed var(--line);color:#C6D4DC}
+  .card li:last-child{border-bottom:none}
+
+  /* projets */
+  .proj{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .proj .card h3{
+    font-family:"Space Grotesk",sans-serif;font-size:18px;color:#fff;margin-bottom:8px;
+  }
+  .proj .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--term-green);margin-bottom:10px}
+  .proj p{font-size:14.5px;color:var(--muted)}
+  .proj .stack{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+  .proj .stack span{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--muted);
+  }
+
+  /* formation */
+  .form-list{display:grid;gap:14px}
+  .form-item{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 22px;display:flex;justify-content:space-between;gap:18px;align-items:baseline;flex-wrap:wrap;
+  }
+  .form-item h3{font-family:"Space Grotesk",sans-serif;font-size:17px;color:#fff}
+  .form-item .where{color:var(--muted);font-size:14.5px}
+  .form-item .when{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--amber);white-space:nowrap}
+
+  /* contact */
+  .contact{
+    background:linear-gradient(180deg, var(--panel-2), var(--panel));
+    color:var(--ink);border-radius:16px;border:1px solid var(--line);
+    padding:52px 40px;text-align:center;position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:3px;
+    background:linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+  .contact h2{font-family:"Space Grotesk",sans-serif;font-size:30px;margin-bottom:10px;color:#fff}
+  .contact p{color:var(--muted);max-width:52ch;margin:0 auto 28px}
+  .contact .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .contact a.main{
+    background:var(--amber);color:#1C1204;text-decoration:none;font-weight:600;
+    padding:12px 26px;border-radius:999px;font-size:15px;
+  }
+  .contact a.main:hover{filter:brightness(1.08)}
+  .contact a.alt{
+    border:1.5px solid var(--line);color:var(--ink);text-decoration:none;
+    padding:12px 26px;border-radius:999px;font-size:15px;
+  }
+  .contact a.alt:hover{border-color:var(--term-green);color:var(--term-green)}
+  .contact .mono{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--term-green);margin-top:26px}
+
+  footer{padding:34px 0 44px;text-align:center;color:var(--muted);font-size:13.5px}
+  footer a{color:var(--muted)}
+  footer a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><b>~/</b>hermas-adjada</a>
+    <ul>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#formation">Formation</a></li>
+      <li><a href="https://github.com/Hermas-ADJADA" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <a class="cta" href="#contact">Me contacter</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">Alternance | Systèmes, Réseaux & Cybersécurité</p>
+          <h1>Hermas Adjada</h1>
+          <p class="lede">Je fais fonctionner des réseaux dont les gens dépendent vraiment : entreprise, opérateur télécom, ministère. En formation Administrateur Systèmes & Réseaux au CESI, je cherche l'entreprise qui me confiera de vraies responsabilités.</p>
+          <div class="chips">
+            <span class="chip">Dès septembre 2026</span>
+            <span class="chip">3 sem. entreprise / 1 sem. école</span>
+            <span class="chip">Mobilité : toute la France</span>
+          </div>
+          <div class="hero-actions">
+            <a class="cta" href="#contact">Discutons de votre infrastructure</a>
+            <a class="btn-ghost" href="#parcours">Voir mon parcours</a>
+            <a class="btn-ghost" href="cv/CV_Hermas_Adjada_ATS.pdf" download>Télécharger mon CV</a>
+          </div>
+        </div>
+        <div class="term" aria-label="Terminal de présentation">
+          <div class="term-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="term-title">hermas@lens: ~</span>
+          </div>
+          <div class="term-body" id="term"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARCOURS -->
+    <section id="parcours">
+      <div class="sec-head">
+        <span class="path">01</span><h2>Parcours</h2><span class="rule"></span>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <p class="tl-date">Août 2025 - Février 2026</p>
+          <h3>Administrateur Réseaux Informatiques <span class="tag">6 mois</span></h3>
+          <p class="tl-org">Astrid Communication | Calavi, Bénin</p>
+          <ul>
+            <li>Administration de l'infrastructure réseau : installation, configuration et sécurisation des équipements et des systèmes</li>
+            <li>Maintenance préventive et optimisation pour réduire les interruptions de service</li>
+            <li>Support technique quotidien : diagnostic et résolution de pannes matérielles et logicielles</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <p class="tl-date">Mars - Juin 2025</p>
+          <h3>Stagiaire Réseaux Informatiques <span class="tag">Mémoire de Licence</span></h3>
+          <p class="tl-org">Ministère du Numérique et de la Digitalisation | Cotonou, Bénin</p>
+          <ul>
+            <li>Analyse complète de l'architecture réseau : topologie, redondance, segmentation</li>
+            <li>Tableaux de bord Power BI lisibles par des décideurs non techniques</li>
+            <li>Au cœur de la dématérialisation des services publics béninois</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <p class="tl-date">Août - Septembre 2024</p>
+          <h3>Stagiaire Télécommunications</h3>
+          <p class="tl-org">Cetelec SA, détaché chez Moov Bénin | opérateur national</p>
+          <ul>
+            <li>Maintenance d'équipements télécoms garantissant la continuité de la connexion des abonnés</li>
+            <li>Gestion des sauvegardes systèmes</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <p class="tl-date">Août - Septembre 2023</p>
+          <h3>Stagiaire Développement Web</h3>
+          <p class="tl-org">QCT Group | Cotonou, Bénin</p>
+          <ul>
+            <li>Développement et optimisation d'un site web (HTML, CSS, PHP, MySQL)</li>
+            <li>Tests multi-navigateurs et débogage : performance et accessibilité</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section id="competences">
+      <div class="sec-head">
+        <span class="path">02</span><h2>Compétences</h2><span class="rule"></span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>reseaux/</h3>
+          <ul>
+            <li>Administration & sécurisation de LAN</li>
+            <li>Équipements Cisco</li>
+            <li>GNS3, Packet Tracer</li>
+            <li>Diagnostic & résolution de pannes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>systemes/</h3>
+          <ul>
+            <li>Windows & Linux</li>
+            <li>Docker</li>
+            <li>Sauvegardes systèmes</li>
+            <li>Git / GitHub</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>dev-data/</h3>
+          <ul>
+            <li>Python, PHP, MySQL</li>
+            <li>HTML / CSS</li>
+            <li>Power BI</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>humain/</h3>
+          <ul>
+            <li>Support & pédagogie utilisateurs</li>
+            <li>Vulgarisation technique</li>
+            <li>Restitution aux décideurs</li>
+            <li>Français natif, Anglais B1</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets">
+      <div class="sec-head">
+        <span class="path">03</span><h2>Projets & travaux</h2><span class="rule"></span>
+      </div>
+      <div class="proj">
+        <div class="card">
+          <p class="meta">Mémoire de Licence | 2025</p>
+          <h3>Système de gestion réseau d'une entreprise</h3>
+          <p>Étude menée au Ministère du Numérique et de la Digitalisation : cartographie de la topologie, analyse de la redondance et de la segmentation, recommandations d'optimisation, restitution en tableaux de bord.</p>
+          <div class="stack"><span>Architecture réseau</span><span>Segmentation</span><span>Power BI</span></div>
+        </div>
+        <div class="card">
+          <p class="meta">Stage | 2023</p>
+          <h3>Site web d'entreprise, de zéro à la mise en ligne</h3>
+          <p>Développement complet pour QCT Group : intégration, base de données, optimisation des performances et tests de compatibilité multi-navigateurs.</p>
+          <div class="stack"><span>HTML/CSS</span><span>PHP</span><span>MySQL</span></div>
+        </div>
+        <div class="card">
+          <p class="meta">Labs | en cours au CESI</p>
+          <h3>Maquettes réseaux : GNS3 & Packet Tracer</h3>
+          <p>Conception de LAN sécurisés en environnement simulé : VLAN, routage, plans d'adressage. Les configurations seront publiées sur GitHub au fil de la formation.</p>
+          <div class="stack"><span>GNS3</span><span>Packet Tracer</span><span>Cisco</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATION -->
+    <section id="formation">
+      <div class="sec-head">
+        <span class="path">04</span><h2>Formation</h2><span class="rule"></span>
+      </div>
+      <div class="form-list">
+        <div class="form-item">
+          <div>
+            <h3>Administrateur Systèmes & Réseaux (alternance)</h3>
+            <p class="where">CESI | recherche d'une entreprise d'accueil dès septembre 2026</p>
+          </div>
+          <span class="when">2026 - 2028</span>
+        </div>
+        <div class="form-item">
+          <div>
+            <h3>Licence Génie Électrique et Informatique, mention Très Bien</h3>
+            <p class="where">INSTI, Lokossa (Bénin) | option Informatique et Télécommunications</p>
+          </div>
+          <span class="when">2021 - 2025</span>
+        </div>
+        <div class="form-item">
+          <div>
+            <h3>Baccalauréat série D, mention Bien</h3>
+            <p class="where">Collège Notre-Dame de Lourdes, Porto-Novo (Bénin)</p>
+          </div>
+          <span class="when">2021</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact">
+        <h2>Vous formez un alternant, vous gagnez un technicien déjà opérationnel.</h2>
+        <p>Disponible dès septembre 2026, 3 semaines par mois dans votre équipe, partout en France. Parlons de votre infrastructure.</p>
+        <div class="row">
+          <a class="main" href="mailto:adjadahermas@gmail.com">adjadahermas@gmail.com</a>
+          <a class="alt" href="https://www.linkedin.com/in/hermas-adjada-3558b6425/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="alt" href="https://github.com/Hermas-ADJADA" target="_blank" rel="noopener">GitHub</a>
+          <a class="alt" href="tel:+33751128885">+33 7 51 12 88 85</a>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <a class="alt" href="cv/CV_Hermas_Adjada_ATS.pdf" download>CV classique (PDF)</a>
+          <a class="alt" href="cv/CV_Hermas_Adjada_Design.pdf" download>CV design (PDF)</a>
+        </div>
+        <p class="mono">status: open_to_work | loc: Lens (62) | mobilité: FR</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Hermas Adjada · Portfolio 2026 · <a href="https://www.linkedin.com/in/hermas-adjada-3558b6425/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/Hermas-ADJADA" target="_blank" rel="noopener">GitHub</a></div>
+</footer>
+
+<script>
+(function(){
+  var el = document.getElementById('term');
+  var lines = [
+    {p:"hermas@lens:~$ ", cmd:"whoami"},
+    {out:"Hermas Adjada : futur Administrateur Systèmes & Réseaux (CESI)"},
+    {p:"hermas@lens:~$ ", cmd:"cat disponibilite.txt"},
+    {out:"Alternance dès septembre 2026\n3 semaines entreprise / 1 semaine école\nMobilité : toute la France"},
+    {p:"hermas@lens:~$ ", cmd:"ping votre-entreprise"},
+    {out:"En attente de réponse : ", hl:"adjadahermas@gmail.com"}
+  ];
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+  function renderAll(){
+    var html = '';
+    lines.forEach(function(l){
+      if(l.cmd !== undefined){ html += '<span class="p">'+esc(l.p)+'</span>'+esc(l.cmd)+'\n'; }
+      else { html += '<span class="out">'+esc(l.out)+'</span>'+(l.hl?'<span class="hl">'+esc(l.hl)+'</span>':'')+'\n'; }
+    });
+    el.innerHTML = html;
+  }
+
+  if(reduced){ renderAll(); return; }
+
+  var i = 0;
+  var buffer = '';
+  function typeLine(){
+    if(i >= lines.length){ el.innerHTML = buffer + '<span class="cursor"></span>'; return; }
+    var l = lines[i];
+    if(l.cmd !== undefined){
+      buffer += '<span class="p">'+esc(l.p)+'</span>';
+      var j = 0;
+      function typeChar(){
+        if(j < l.cmd.length){
+          el.innerHTML = buffer + esc(l.cmd.slice(0, j+1)) + '<span class="cursor"></span>';
+          j++;
+          setTimeout(typeChar, 45);
+        } else {
+          buffer += esc(l.cmd) + '\n';
+          i++;
+          setTimeout(typeLine, 260);
+        }
+      }
+      typeChar();
+    } else {
+      buffer += '<span class="out">'+esc(l.out)+'</span>'+(l.hl?'<span class="hl">'+esc(l.hl)+'</span>':'')+'\n';
+      el.innerHTML = buffer + '<span class="cursor"></span>';
+      i++;
+      setTimeout(typeLine, 380);
+    }
+  }
+  setTimeout(typeLine, 500);
+})();
+</script>
+
+</body>
+</html>
